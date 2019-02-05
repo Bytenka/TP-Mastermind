@@ -1,2 +1,2 @@
 # TP-Mastermind
-J'ai envie de mourir
+J'ai envie de **mourir**
