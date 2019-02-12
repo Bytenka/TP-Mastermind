@@ -1,3 +1,4 @@
+package Jeu;
 import java.awt.Color;
 
 public class Rangee {
