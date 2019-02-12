@@ -8,8 +8,10 @@ import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Mastermind extends Frame implements WindowListener {
+public class Mastermind extends Frame implements WindowListener, Observer {
 
 	Panel vueClavier;
 	Canvas vuePropositions;
@@ -46,13 +48,23 @@ public class Mastermind extends Frame implements WindowListener {
 
 		this.add(vueClavier, BorderLayout.PAGE_END);
 	}
+	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		System.out.println("Called update in Frame");
+	}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		this.dispose();
+	}
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
-
+		Mastermind jeu = new Mastermind();
 		Modele modele = new Modele();
-
-		new Mastermind();
+		modele.addObserver(jeu);
+		
+		System.out.println("Hello World!");
 	}
 
 	@Override
@@ -61,11 +73,6 @@ public class Mastermind extends Frame implements WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
-	}
-
-	@Override
-	public void windowClosing(WindowEvent arg0) {
-		System.exit(0);
 	}
 
 	@Override
@@ -83,5 +90,4 @@ public class Mastermind extends Frame implements WindowListener {
 	@Override
 	public void windowOpened(WindowEvent arg0) {
 	}
-
 }

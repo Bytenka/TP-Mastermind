@@ -1,8 +1,9 @@
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
-public class Modele {
+public class Modele extends Observable {
 	public static final Color[] COULEURS = { Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.RED,
 			Color.ORANGE, Color.WHITE, Color.BLACK };
 	public static final int N_TENTATIVES = 10;
