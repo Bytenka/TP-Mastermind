@@ -21,6 +21,7 @@ public class VuePropositions extends Canvas {
 
 	@Override
 	public void paint(Graphics g) {
+		// Display propositions
 		int linesCount = 0;
 		for (Rangee r : relativeModele.propositions) {
 			int spacesCount = 0;
@@ -35,6 +36,22 @@ public class VuePropositions extends Canvas {
 				spacesCount++;
 			}
 			linesCount++;
+		}
+		
+		// Display current proposition
+		// @TODO relativeModele.propEnCours
+		
+		// Display correct combinaison (for debugging) @TODO
+		int spacesCount = 0;
+		for (Color c : relativeModele.combinaison) {
+			g.setColor(c);
+			g.fillOval(
+					(DOT_SIZE + SPACE_SIZE) * spacesCount, 
+					580, 
+					DOT_SIZE,
+					DOT_SIZE);
+			
+			spacesCount++;
 		}
 	}
 }

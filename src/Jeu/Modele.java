@@ -17,12 +17,14 @@ public class Modele extends Observable {
 
 	public Etat etat;
 	public Rangee combinaison;
+	public Rangee propEnCours; // @TODO ??
 	public ArrayList<Rangee> propositions;
 	public int tentative;
 
 	public Modele() {
 		etat = Etat.EN_COURS;
 		combinaison = new Rangee();
+		propEnCours = null;
 		propositions = new ArrayList<>();
 		tentative = 0;
 
@@ -35,12 +37,20 @@ public class Modele extends Observable {
 			}
 		}
 
+		// @TODO Debug
 		propositions.add(combinaison);
 		propositions.add(combinaison);
 		propositions.add(combinaison);
 		propositions.add(combinaison);
 		propositions.add(combinaison);
 		propositions.add(combinaison);
+	}
+	
+	public void submitRangee(Rangee rangee) {
+		checkRangee(rangee);
+		// @TODO get result from check and add it
+		propositions.add(rangee);
+		tentative++;
 	}
 
 	public Color[] checkRangee(Rangee rangee) {
@@ -54,10 +64,10 @@ public class Modele extends Observable {
 
 			else if (combinaison.contains(rc[i]))
 				tr[i] = Color.WHITE;
-			else 
+			else
 				tr[i] = null;
 		}
-		
+
 		return tr;
 	}
 }

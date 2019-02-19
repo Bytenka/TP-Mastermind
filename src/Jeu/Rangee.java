@@ -31,8 +31,7 @@ public class Rangee implements Iterable<Color> {
 	}
 
 	public boolean contains(Color c) {
-		for (int i = 0; i < jetons.length; i++)
-		{
+		for (int i = 0; i < jetons.length; i++) {
 			if (c.equals(jetons[i]))
 				return true;
 		}
