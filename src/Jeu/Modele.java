@@ -14,10 +14,10 @@ public class Modele extends Observable {
 		EN_COURS, GAGNE, PERDU
 	};
 
-	private Etat etat;
-	private Rangee combinaison;
-	private ArrayList<Rangee> propositions;
-	private int tentative;
+	public Etat etat;
+	public Rangee combinaison;
+	public ArrayList<Rangee> propositions;
+	public int tentative;
 
 	public Modele() {
 		etat = Etat.EN_COURS;
