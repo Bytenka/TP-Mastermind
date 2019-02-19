@@ -16,10 +16,14 @@ import java.util.Observer;
 
 public class Mastermind extends Frame implements WindowListener, Observer {
 
+	Modele modele;
+	
 	VueClavier vueClavier;
 	VuePropositions vuePropositions;
 
 	public Mastermind() {
+		modele = new Modele();
+		
 		this.setTitle("Mastermind");
 		this.setSize(300, 700);
 		this.setLayout(new BorderLayout());
@@ -27,7 +31,9 @@ public class Mastermind extends Frame implements WindowListener, Observer {
 		this.setVisible(true);
 
 		vueClavier = new VueClavier();
-		vuePropositions = new VuePropositions();
+		vuePropositions = new VuePropositions(modele);
+		
+		//modele.addObserver(vueClavier);
 
 		this.add(vuePropositions, BorderLayout.CENTER);
 		this.add(vueClavier, BorderLayout.PAGE_END);
@@ -45,8 +51,6 @@ public class Mastermind extends Frame implements WindowListener, Observer {
 
 	public static void main(String[] args) {
 		Mastermind jeu = new Mastermind();
-		Modele modele = new Modele();
-		modele.addObserver(jeu);
 
 		System.out.println("Hello World!");
 	}
