@@ -22,36 +22,37 @@ public class VuePropositions extends Canvas {
 	@Override
 	public void paint(Graphics g) {
 		// Display propositions
-		int linesCount = 0;
-		for (Rangee r : relativeModele.propositions) {
-			int spacesCount = 0;
-			for (Color c : r) {
-				g.setColor(c);
-				g.fillOval(
-						(DOT_SIZE + SPACE_SIZE) * spacesCount, 
-						(DOT_SIZE + SPACE_SIZE) * linesCount, 
-						DOT_SIZE,
-						DOT_SIZE);
-				
-				spacesCount++;
-			}
-			linesCount++;
-		}
-		
+		int lineNb = 0;
+		for (Rangee r : relativeModele.propositions)
+			drawRangee(lineNb++, r, g);
+
 		// Display current proposition
-		// @TODO relativeModele.propEnCours
-		
+			drawRangee(lineNb++, relativeModele.currentProp, g);
+
 		// Display correct combinaison (for debugging) @TODO
-		int spacesCount = 0;
-		for (Color c : relativeModele.combinaison) {
+		drawRangee(11, relativeModele.combinaison, g);
+	}
+
+	public void drawRangee(int lineNb, Rangee rangee, Graphics g) {
+		// Drawing proposition circles
+		int colorNb = 0;
+		for (Color c : rangee) {
 			g.setColor(c);
-			g.fillOval(
-					(DOT_SIZE + SPACE_SIZE) * spacesCount, 
-					580, 
-					DOT_SIZE,
-					DOT_SIZE);
-			
-			spacesCount++;
+			g.fillOval((DOT_SIZE + SPACE_SIZE) * colorNb, (DOT_SIZE + SPACE_SIZE) * lineNb, DOT_SIZE, DOT_SIZE);
+			colorNb++;
+		}
+
+		// Drawing results circles
+		Color[] results = rangee.getResult();
+		if (results != null) {
+			for (int i = 0; i < results.length; i++) {
+				Color c = results[i];
+				if (c != null) {
+					g.setColor(c);
+					g.fillOval((DOT_SIZE + SPACE_SIZE) * colorNb + i*15, (DOT_SIZE + SPACE_SIZE) * lineNb, 10, 10);
+				}
+
+			}
 		}
 	}
 }

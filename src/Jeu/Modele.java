@@ -17,14 +17,15 @@ public class Modele extends Observable {
 
 	public Etat etat;
 	public Rangee combinaison;
-	public Rangee propEnCours; // @TODO ??
+	public Rangee currentProp;
 	public ArrayList<Rangee> propositions;
 	public int tentative;
 
 	public Modele() {
 		etat = Etat.EN_COURS;
 		combinaison = new Rangee();
-		propEnCours = null;
+		currentProp = new Rangee();
+
 		propositions = new ArrayList<>();
 		tentative = 0;
 
@@ -45,29 +46,40 @@ public class Modele extends Observable {
 		propositions.add(combinaison);
 		propositions.add(combinaison);
 	}
-	
-	public void submitRangee(Rangee rangee) {
-		checkRangee(rangee);
-		// @TODO get result from check and add it
-		propositions.add(rangee);
-		tentative++;
-	}
 
-	public Color[] checkRangee(Rangee rangee) {
-		Color[] tr = new Color[Modele.DIFFICULTE];
-		Color[] tc = combinaison.getJetons();
-		Color[] rc = rangee.getJetons();
-
-		for (int i = 0; i < rc.length; i++) {
-			if (rc[i] == tc[i])
-				tr[i] = Color.BLACK;
-
-			else if (combinaison.contains(rc[i]))
-				tr[i] = Color.WHITE;
-			else
-				tr[i] = null;
+	public void submitColor(Color color) {
+		try {
+			currentProp.pushColor(color);
+		} catch (Exception e) {
+			throw new RuntimeException("Could not push color: " + e.getMessage());
 		}
 
-		return tr;
+		if (currentProp.isCompleted()) {
+			System.out.println("Proposition completed, setting results");
+			currentProp.setResult(checkProp());
+			propositions.add(currentProp);
+			currentProp = new Rangee();
+			tentative++;
+		}
+	}
+
+	public Color[] checkProp() {
+		Color[] toReturn = new Color[Modele.DIFFICULTE];
+
+		Color[] combColors = combinaison.getJetons();
+		Color[] propColors = currentProp.getJetons();
+
+		// Iterate on colors, find matches
+		for (int i = 0; i < combColors.length; i++) {
+			if (combColors[i] == propColors[i])
+				toReturn[i] = Color.BLACK;
+
+			else if (combinaison.contains(propColors[i]))
+				toReturn[i] = Color.WHITE;
+			else
+				toReturn[i] = null;
+		}
+
+		return toReturn;
 	}
 }

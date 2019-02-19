@@ -7,25 +7,17 @@ import java.awt.event.ActionListener;
 
 public class Controleur implements ActionListener {
 	
-	Modele mod;
+	Modele modele;
 	
-	public Controleur(Modele m) {
-		this.mod = m;
+	public Controleur(Modele modele) {
+		this.modele = modele;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("clicked");
-		Button b = (Button) e.getSource();
-		Color c = b.getBackground();
-		try {
-			mod.combinaison.pushColor(c);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Cannot push color" + e1.getMessage());
-		}
+		Color buttonColor = ((Button) e.getSource()).getBackground();
+		System.out.println("Button pressed! Color: " + buttonColor);
+		
+		modele.submitColor(buttonColor);
 	}
-	
-	
 }
