@@ -41,11 +41,12 @@ public class Rangee implements Iterable<Color> {
 	@Override
 	public boolean equals(Object other) {
 		Color[] otherJ = ((Rangee) other).getJetons();
-		for (Color thisJ : jetons) {
-			if (!thisJ.equals(otherJ))
+		for (int i = 0; i < otherJ.length; i++) {
+			if (!jetons[i].equals(otherJ[i]))
 				return false;
 		}
 		return true;
+
 	}
 
 	@Override
