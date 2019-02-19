@@ -7,6 +7,8 @@ import java.awt.Graphics;
 public class VuePropositions extends Canvas {
 
 	private Modele relativeModele;
+	private static int DOT_SIZE = 40;
+	private static int SPACE_SIZE = DOT_SIZE / 4;
 
 	public VuePropositions(Modele relativeModele) {
 		super();
@@ -19,13 +21,20 @@ public class VuePropositions extends Canvas {
 
 	@Override
 	public void paint(Graphics g) {
+		int linesCount = 0;
 		for (Rangee r : relativeModele.propositions) {
 			int spacesCount = 0;
 			for (Color c : r) {
 				g.setColor(c);
-				g.fillOval(60*spacesCount, 0, 50, 50);
+				g.fillOval(
+						(DOT_SIZE + SPACE_SIZE) * spacesCount, 
+						(DOT_SIZE + SPACE_SIZE) * linesCount, 
+						DOT_SIZE,
+						DOT_SIZE);
+				
 				spacesCount++;
 			}
+			linesCount++;
 		}
 	}
 }

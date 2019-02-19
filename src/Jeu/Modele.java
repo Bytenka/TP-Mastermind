@@ -36,5 +36,28 @@ public class Modele extends Observable {
 		}
 
 		propositions.add(combinaison);
+		propositions.add(combinaison);
+		propositions.add(combinaison);
+		propositions.add(combinaison);
+		propositions.add(combinaison);
+		propositions.add(combinaison);
+	}
+
+	public Color[] checkRangee(Rangee rangee) {
+		Color[] tr = new Color[Modele.DIFFICULTE];
+		Color[] tc = combinaison.getJetons();
+		Color[] rc = rangee.getJetons();
+
+		for (int i = 0; i < rc.length; i++) {
+			if (rc[i] == tc[i])
+				tr[i] = Color.BLACK;
+
+			else if (combinaison.contains(rc[i]))
+				tr[i] = Color.WHITE;
+			else 
+				tr[i] = null;
+		}
+		
+		return tr;
 	}
 }

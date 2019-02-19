@@ -26,6 +26,29 @@ public class Rangee implements Iterable<Color> {
 		return indiceJeton == Modele.DIFFICULTE;
 	}
 
+	public Color[] getJetons() {
+		return jetons;
+	}
+
+	public boolean contains(Color c) {
+		for (int i = 0; i < jetons.length; i++)
+		{
+			if (c.equals(jetons[i]))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		Color[] otherJ = ((Rangee) other).getJetons();
+		for (Color thisJ : jetons) {
+			if (!thisJ.equals(otherJ))
+				return false;
+		}
+		return true;
+	}
+
 	@Override
 	public Iterator<Color> iterator() {
 		return new MyIterator();
@@ -33,7 +56,7 @@ public class Rangee implements Iterable<Color> {
 
 	private class MyIterator implements Iterator {
 		private int position = 0;
-		
+
 		@Override
 		public boolean hasNext() {
 			return position < Modele.DIFFICULTE;
