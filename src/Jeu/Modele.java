@@ -1,4 +1,5 @@
 package Jeu;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -33,5 +34,7 @@ public class Modele extends Observable {
 				throw new RuntimeException("Cannot push Color: " + e.getMessage());
 			}
 		}
+
+		propositions.add(combinaison);
 	}
 }
