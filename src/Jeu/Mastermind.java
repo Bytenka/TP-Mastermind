@@ -1,26 +1,18 @@
 package Jeu;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Panel;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Observable;
-import java.util.Observer;
 
 public class Mastermind extends Frame implements WindowListener {
 
 	Modele modele;
+	Controleur ctrl;
 	
 	VueClavier vueClavier;
 	VuePropositions vuePropositions;
-	Controleur ctrl;
 
 	public Mastermind() {
 		modele = new Modele();
@@ -33,10 +25,8 @@ public class Mastermind extends Frame implements WindowListener {
 		this.setVisible(true);
 
 		vueClavier = new VueClavier(ctrl);
-		vuePropositions = new VuePropositions(modele);
 		modele.addObserver(vueClavier);
-		
-		//modele.addObserver(vueClavier);
+		vuePropositions = new VuePropositions(modele);
 
 		this.add(vuePropositions, BorderLayout.CENTER);
 		this.add(vueClavier, BorderLayout.PAGE_END);
